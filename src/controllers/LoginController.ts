@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { get, post, controller, bodyValidator } from './decorators';
 
 @controller('/auth')
-class LoginControllers {
+class LoginController {
   @get('/login')
   getLogin(req: Request, res: Response): void {
     res.send(`
@@ -32,4 +32,10 @@ class LoginControllers {
       res.send('Invalid email or password')
     }
   }
+
+  @get('/logout')
+  getLogout(req: Request, res: Response) {
+  req.session = undefined;
+  res.redirect('/');
+}
 }
